@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang=”en”>
+<head>
+    <meta charset=”UTF-8”>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+    <title>Happy Birthday Nanna ❤️</title>
+    <link rel=”stylesheet” href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
+    <style>
+        Body {
+            Margin: 0; padding: 0;
+            Font-family: ‘Comic Sans MS’, cursive, sans-serif;
+            Color: black;
+            Text-align: center;
+            Overflow-x: hidden;
+            Background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        Section {
+            Width: 100%; height: 100vh;
+            Position: absolute; top: 0; left: 0;
+            Display: none;
+            Background-color: rgba(255, 240, 245, 0.9);
+            Background-size: cover;
+            Background-position: center;
+            Padding-top: 150px;
+            Overflow-y: auto;
+        }
+        H1 {
+            Font-size: 50px;
+            Text-shadow: 2px 2px 10px #ff69b4;
+            Margin-bottom: 20px;
+        }
+        P {
+            Font-size: 24px;
+            Text-shadow: 1px 1px 5px #ffb6c1;
+            Max-width: 800px;
+            Margin: 0 auto 30px;
+            Line-height: 1.6;
+        }
+        .button {
+            Margin-top: 30px; padding: 15px 30px;
+            Font-size: 20px; background: pink;
+            Border: none; border-radius: 15px; cursor: pointer;
+            Transition: 0.3s;
+            Color: black;
+            Box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .button:hover {
+            Background: red;
+            Color: white;
+            Transform: translateY(-3px);
+            Box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .heart {
+            Position: absolute; width: 20px; height: 20px;
+            Background: red; transform: rotate(45deg);
+            Animation: float 5s linear infinite;
+        }
+        .heart:before, .heart:after {
+            Content: ‘’; position: absolute;
+            Width: 20px; height: 20px;
+            Background: red; border-radius: 50%;
+        }
+        .heart:before { top:-10px; left:0; }
+        .heart:after { left:10px; top:0; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+        }
+
+        /* 3D Cake Styles */
+        .cake-container {
+            Perspective: 1000px;
+            Display: inline-block;
+            Margin-top: 50px;
+        }
+        .cake {
+            Position: relative;
+            Width: 200px; height: 150px;
+            Transform-style: preserve-3d;
+            Transform: rotateX(15deg);
+            Cursor: pointer;
+            Transition: transform 0.5s;
+        }
+        .cake:hover {
+            Transform: rotateX(5deg) rotateY(5deg);
+            Animation: wiggle 0.5s ease-in-out;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotateX(5deg) rotateY(0deg); }
+            50% { transform: rotateX(5deg) rotateY(10deg); }
+        }
+        .layer {
+            Position: absolute;
+            Border-radius: 50% 50% 0 0;
+            Box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        .layer1 { /* Bottom layer */
+            Width: 200px; height: 50px;
+            Background: linear-gradient(to bottom, #ff69b4, #ffb6c1);
+            Bottom: 0;
+        }
+        .layer2 { /* Middle layer */
+            Width: 150px; height: 40px;
+            Background: linear-gradient(to bottom, #ff1493, #ff69b4);
+            Bottom: 50px; left: 25px;
+        }
+        .layer3 { /* Top layer */
+            Width: 100px; height: 30px;
+            Background: linear-gradient(to bottom, #dc143c, #ff1493);
+            Bottom: 90px; left: 50px;
+        }
+        /* Cute Decorations */
+        .sprinkle {
+            Position: absolute;
+            Width: 4px; height: 4px;
+            Border-radius: 50%;
+            Background: radial-gradient(circle, gold, pink, red);
+            Box-shadow: 0 0 3px rgba(255,215,0,0.5);
+        }
+        .icing-swirl {
+            Position: absolute;
+            Width: 20px; height: 15px;
+            Background: linear-gradient(45deg, #fff, #ffb6c1);
+            Border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            Transform: rotate(45deg);
+        }
+        .cherry {
+            Position: absolute;
+            Width: 12px; height: 12px;
+            Background: radial-gradient(circle, #dc143c, #8b0000);
+            Border-radius: 50%;
+            Top: -15px; left: 44%;
+        }
+        .cherry-stem {
+            Position: absolute;
+            Width: 2px; height: 8px;
+            Background: green;
+            Top: -20px; left: 48%;
+            Border-radius: 1px;
+        }
+        .heart-topping {
+            Position: absolute;
+            Width: 6px; height: 6px;
+            Background: pink;
+            Transform: rotate(45deg);
+        }
+        .heart-topping:before, .heart-topping:after {
+            Content: ‘’;
+            Position: absolute;
+            Width: 6px; height: 6px;
+            Background: pink;
+            Border-radius: 50%;
+        }
+        .heart-topping:before { top: -3px; left: 0; }
+        .heart-topping:after { left: 3px; top: 0; }
+        .candle {
+            Position: absolute;
+            Width: 4px; height: 20px;
+            Background: white;
+            Bottom: 120px; left: 48%;
+            Border-radius: 2px;
+        }
+        .flame {
+            Position: absolute;
+            Width: 6px; height: 10px;
+            Background: #ff4500;
+            Top: -10px; left: -1px;
+            Border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            Animation: flicker 0.5s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(0.8); }
+        }
+        .sparkle {
+            Position: absolute;
+            Width: 4px; height: 4px;
+            Background: gold;
+            Border-radius: 50%;
+            Animation: sparkle-float 3s linear infinite;
+        }
+        @keyframes sparkle-float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .blow-out {
+            Opacity: 0;
+            Transition: opacity 1s;
+        }
+
+        /* Character Styles */
+        .character-container {
+            Display: flex;
+            Justify-content: center;
+            Flex-wrap: wrap;
+            Gap: 40px;
+            Margin: 40px auto;
+            Max-width: 900px;
+        }
+        .character {
+            Text-align: center;
+            Flex: 1;
+            Min-width: 300px;
+            Padding: 20px;
+            Background: rgba(255, 255, 255, 0.7);
+            Border-radius: 20px;
+            Box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            Transition: transform 0.3s;
+        }
+        .character:hover {
+            Transform: translateY(-10px);
+        }
+        .character img {
+            Max-width: 100%;
+            Height: auto;
+            Border-radius: 15px;
+            Margin-bottom: 15px;
+            Border: 5px solid #fff;
+        }
+        .character h2 {
+            Font-size: 2rem;
+            Margin-bottom: 10px;
+        }
+        .character-icon {
+            Font-size: 5rem;
+            Margin: 15px 0;
+            Display: block;
+        }
+        .spiderman { color: #e23636; }
+        .cinderella { color: #6a5acd; }
+
+        /* Message Box Styles */
+        .message-container {
+            Display: flex;
+            Justify-content: center;
+            Flex-wrap: wrap;
+            Gap: 40px;
+            Margin: 40px auto;
+            Max-width: 900px;
+        }
+        .message-box {
+            Text-align: center;
+            Flex: 1;
+            Min-width: 300px;
+            Padding: 20px;
+            Background: rgba(255, 255, 255, 0.7);
+            Border-radius: 20px;
+            Box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            Transition: transform 0.3s;
+        }
+        .message-box:hover {
+            Transform: translateY(-10px);
+        }
+        .message-box h2 {
+            Font-size: 2rem;
+            Margin-bottom: 10px;
+        }
+        .spiderman-box {
+            Background: rgba(226, 54, 54, 0.1);
+            Border: 3px solid #e23636;
+        }
+        .spiderman-box h2 { color: #e23636; }
+        .cinderella-box {
+            Background: rgba(106, 90, 205, 0.1);
+            Border: 3px solid #6a5acd;
+        }
+        .cinderella-box h2 { color: #6a5acd; }
+        .message-icon {
+            Font-size: 5rem;
+            Margin: 15px 0;
+            Display: block;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 600px) {
+            H1 { font-size: 30px; }
+            P { font-size: 18px; }
+            .button { padding: 10px 20px; font-size: 16px; }
+            .cake { width: 150px; height: 112px; }
+            .layer1 { width: 150px; height: 37px; }
+            .layer2 { width: 112px; height: 30px; bottom: 37px; left: 19px; }
+            .layer3 { width: 75px; height: 22px; bottom: 67px; left: 37px; }
+            .candle { bottom: 89px; left: 47%; }
+            .cherry { top: -11px; left: 43%; }
+            .cherry-stem { top: -15px; left: 47%; }
+            .sprinkle, .icing-swirl, .heart-topping { transform: scale(0.7); }
+            .character { min-width: 250px; }
+            .character-icon { font-size: 4rem; }
+            .message-box { min-width: 250px; }
+            .message-icon { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!—Background Music 
+    <audio autoplay loop>
+        <source src=https://www.bgmringtones.com/wp-content/uploads/2025/04/Court-Premalo-Flute-Bgm.mp3 type=”audio/mpeg”>
+    </audio>
+
+    <section id=”page1” style=”display:block;”>
+        <h1>Happy Birthday, Nanna 😘❤️</h1>
+        <p> 💖 My love! Every moment with you feels like a dream come true 🌟. I’m so lucky 🍀 to have you in my life, and I can’t wait to make more beautiful memories 📸✨ with you every year. Wishing you all the happiness your heart can hold today and always ❤️. I love you darling! 😘💞</p>
+        
+        <div class=”character-container”>
+            <div class=”character”>
+                <I class=”fas fa-spider spiderman character-icon”></i>
+                <h2>My Superhero 🦸‍♂️🤧</h2>
+                <p>🕸️💙 You’re my Spider‑Man – always there to save the day! 🕷️✨💪</p>
+            </div>
+            
+            <div class=”character”>
+                <I class=”fas fa-crown cinderella character-icon”></i>
+                <h2>Your Cinderella 👸🏰</h2>
+                <p>🤴💖 You’re my Prince Charming who makes all my dreams come true! ✨🌹💫</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(2)” aria-label=”Go to next surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page2”>
+        <h1>To My Sweet Nanna ❤️</h1>
+        <p>Every moment with you is a treasure. I can’t wait to make more memories together. 💖</p>
+        
+        <div class=”character-container”>
+            <div class=”character”>
+                <I class=”fas fa-mask spiderman character-icon”></i>
+                <h2>My Protector🩷😇</h2>
+                <p> 🕷️💖 Like Spider Man, you always know how to protect my heart 🛡️❤️✨</p>
+            </div>
+            
+            <div class=”character”>
+                <I class=”fas fa-glass-slipper cinderella character-icon”></i>
+                <h2>My Perfect Fit 🥹🫴</h2>
+                <p>✨ You fit perfectly into my life, just like Cinderella’s 💖🌟</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(3)” aria-label=”Go to next surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page3”>
+        <h1>My Sunshine ☀️❤️</h1>
+        <p>🌟 You light up my life in ways I never imagined ✨💖. You’re a rare combination of kind 💕, strong 💪, and effortlessly charming 😍. I feel so blessed 🙏 to have you by my side every single day 🌸. Watching you grow 🌱 and achieve your dreams 🌈 has been nothing short of inspiring 🌟, and I know this year is going to bring even more incredible things your way 🎉🎁. You deserve all the best 🏆💖. Let’s make this birthday unforgettable 🎂🎊💞!</p>
+        
+        <div class=”message-container”>
+            <div class=”message-box spiderman-box”>
+                <I class=”fas fa-spider message-icon”></i>
+                <h2>Spider-Man Says💗🫂</h2>
+                <p> 🕷️💪 With great power comes great responsibility… to love you forever ❤️♾️✨</p>
+            </div>
+            
+            <div class=”message-box cinderella-box”>
+                <I class=”fas fa-crown message-icon”></i>
+                <h2>Cinderella Whispers ✨</h2>
+                <p>🌙🌌 Even at midnight, my love for you will never fade ❤️✨💫</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(4)” aria-label=”Go to next surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page4”>
+        <h1>Forever With You 💖</h1>
+        <p>💖 Today, as we celebrate you 🎉, I want you to know that no matter what tomorrow brings 🌅, I’ll be here, right by your side 🤝. You’re my forever ♾️, and there’s no one else I’d rather share this journey with 🚀❤️. Here’s to all the years ahead, filled with love and happiness 💞✨🌹</p>
+        
+        <div class=”character-container”>
+            <div class=”character”>
+                <I class=”fas fa-heart spiderman character-icon”></i>
+                <h2>My Hero 🤧😘</h2>
+                <p>🕸️💖 You swing into my life and save me every day 🕷️✨💪</p>
+            </div>
+            
+            <div class=”character”>
+                <I class=”fas fa-heart cinderella character-icon”></i>
+                <h2>My Prince 🤴</h2>
+                <p> 👑💖 You’re the prince I’ve been dreaming of my whole life ✨🌹💫</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(5)” aria-label=”Go to next surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page5”>
+        <h1>Happy Birthday, My Love! ❤️</h1>
+        <p>💖 You are my everything, Nanna ❤️. With every passing day 🌅, I’m more sure that I want to spend forever with you ♾️. No matter how much time passes ⏳, my love for you will only grow stronger 💞🔥. I’m yours, today and forever 💍✨</p>
+        
+        <div class=”message-container”>
+            <div class=”message-box spiderman-box”>
+                <I class=”fas fa-mask message-icon”></i>
+                <h2>Spider-Man message💌</h2>
+                <p>❤️♾️ I’ll always love you for a lifetime 💖✨</p>
+            </div>
+            
+            <div class=”message-box cinderella-box”>
+                <I class=”fas fa-glass-slipper message-icon”></i>
+                <h2>Cinderella message ✉️</h2>
+                <p>❤️ I’ll always support you in everything! 🤗🫂🌟💖</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(6)” aria-label=”Go to next Surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page6”>
+        <h1>Cutee Message🫠</h1>
+        <p>But honestly, you make every day better, even with your cutee face 😍 and your shying face 🥺. I’m so lucky to have a husband who can make me laugh till my cheeks become red or pink 😂🥰. Hope you have the best day ever, babe! ❤️✨</p>
+        
+        <div class=”character-container”>
+            <div class=”character”>
+                <I class=”fas fa-laugh-beam spiderman character-icon”></i>
+                <h2>My Favorite Hero🫠🩷</h2>
+                <p>You always know how to make me smile!🥹🫠</p>
+            </div>
+            
+            <div class=”character”>
+                <I class=”fas fa-grin-hearts cinderella character-icon”></i>
+                <h2>My Charming Prince🥹🫵</h2>
+                <p>Your charm makes my heart skip a beat!💓💗</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(7)” aria-label=”Go to next Surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page7”>
+        <h1>Special Message🫶</h1>
+        <p>On your special day, I just want to remind you of how deeply I care for you ❤️. You are the person I want to spend every day with 🥰, and I can’t wait to see what the future holds for us ✨. Thank you for being the most amazing part of my life 🌹. I love you more than you can imagine 💖.</p>
+        
+        <div class=”character-container”>
+            <div class=”character”>
+                <I class=”fas fa-star spiderman character-icon”></i>
+                <h2>My Star⭐</h2>
+                <p>You shine brighter than anyone else ⭐✨!</p>
+            </div>
+            
+            <div class=”character”>
+                <I class=”fas fa-gem cinderella character-icon”></i>
+                <h2>My Treasure 💎🪙</h2>
+                <p>You’re more precious than any royal jewel! 💎🩷</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(8)” aria-label=”Go to next Surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page8”>
+        <h1>Caution Message ⚠</h1>
+        <p>Every time I think about you, my heart skips a beat 💓. I can’t wait for our marriage 💍, to feel your arms around me 🤗, and just get lost in the warmth of your love ❤️‍🔥. You make everything feel brighter 🌟, and I love how every hug from you feels like home 🏡. I want to hold you forever, steal kisses 😘, hugs 🤗, and cherish how special you are to me 💖</p>
+        
+        <div class=”character-container”>
+            <div class=”character”>
+                <I class=”fas fa-home spiderman character-icon”></i>
+                <h2>My Home 🏠🤗</h2>
+                <p>With you, I’m always where I belong🥹🫴.</p>
+            </div>
+            
+            <div class=”character”>
+                <I class=”fas fa-kiss-wink-heart cinderella character-icon”></i>
+                <h2>My Fairytale🦄</h2>
+                <p>Our love story is better than any fairytale!💗🫂</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(9)” aria-label=”Go to next Surprise”>Next Surprise ➡️</button>
+    </section>
+
+    <section id=”page9”>
+        <h1>Lovely Message💗🤧</h1>
+        <p>I love you more than I love myself, and that’s saying a lot because you are my everything ❤️. I miss you so much — it’s like my heart isn’t whole without you . You’re my hubby💙, my bava💗, my nanna🫂, my kanna🥹, my cutee🫠,my pookie🎀… you’re my world 🌏✨. You are the reason I smile 😊, the reason I feel so alive 🌸💫. You’re not just a part of my life — you are my life, and I’ll love you forever and always ♾️💖</p>
+        
+        <div class=”message-container”>
+            <div class=”message-box spiderman-box”>
+                <I class=”fas fa-heart message-icon”></i>
+                <h2>Spider-Man’s Heart🩵</h2>
+                <p>My web may be strong, but my love for you is stronger🫡🥹!</p>
+            </div>
+            
+            <div class=”message-box cinderella-box”>
+                <I class=”fas fa-heart message-icon”></i>
+                <h2>Cinderella’s heart💕</h2>
+                <p>Even magic 🪄 can’t compare to the love I feel for you!🫠🫶</p>
+            </div>
+        </div>
+        
+        <button class=”button” onclick=”nextPage(10)” aria-label=”Go to cake page”>Blow Out the Candles! 🎂</button>
+    </section>
+
+    <section id=”page10”>
+        <h1>Make a Wish Nanna! 🎂❤️</h1>
+        <p>Click the cake to blow out the candles and make your wish come true. 💖</p>
+        <div class=”cake-container”>
+            <div class=”cake” onclick=”blowCandles()”>
+                <div class=”layer layer1”>
+                    <div class=”sprinkle” style=”top: 10px; left: 20px;”></div>
+                    <div class=”sprinkle” style=”top: 15px; left: 80px;”></div>
+                    <div class=”sprinkle” style=”top: 20px; left: 140px;”></div>
+                    <div class=”icing-swirl” style=”top: 5px; left: 50px;”></div>
+                    <div class=”heart-topping” style=”top: 25px; left: 100px;”></div>
+                </div>
+                <div class=”layer layer2”>
+                    <div class=”sprinkle” style=”top: 8px; left: 15px;”></div>
+                    <div class=”sprinkle” style=”top: 12px; left: 60px;”></div>
+                    <div class=”icing-swirl” style=”top: 3px; left: 30px;”></div>
+                    <div class=”heart-topping” style=”top: 18px; left: 80px;”></div>
+                </div>
+                <div class=”layer layer3”>
+                    <div class=”cherry”></div>
+                    <div class=”cherry-stem”></div>
+                    <div class=”sprinkle” style=”top: 5px; left: 10px;”></div>
+                    <div class=”icing-swirl” style=”top: 2px; left: 20px;”></div>
+                </div>
+                <div class=”candle”>
+                    <div class=”flame”></div>
+                </div>
+            </div>
+        </div>
+        <button class=”button” onclick=”nextPage(1)” aria-label=”Back to start”>Back to Start 💌</button>
+    </section>
+
+    <script>
+        // Navigation between pages
+        Function nextPage(num){
+            Let pages = 10;
+            For(let i=1;i<=pages;i++){
+                Document.getElementById(‘page’+i).style.display=’none’;
+            }
+            Document.getElementById(‘page’+num).style.display=’block’;
+        }
+
+        // Blow out candles function (with extra sparkles)
+        Function blowCandles() {
+            Const flames = document.querySelectorAll(‘.flame’);
+            Flames.forEach(flame => flame.classList.add(‘blow-out’));
+            For(let i=0; i<15; i++){
+                Let sparkle = document.createElement(‘div’);
+                Sparkle.className = ‘sparkle’;
+                Sparkle.style.left = Math.random()*100 + ‘%’;
+                Sparkle.style.animationDelay = Math.random()*2 + ‘s’;
+                Document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 3000);
+            }
+        }
+
+        // Floating hearts animation
+        For(let i=0;i<30;i++){
+            Let heart=document.createElement(‘div’);
+            Heart.className=’heart’;
+            Heart.style.left=Math.random()*100+’%’;
+            Heart.style.animationDuration=3+Math.random()*5+’s’;
+            Heart.style.width=10+Math.random()*20+’px’;
+            Heart.style.height=10+Math.random()*20+’px’;
+            Document.body.appendChild(heart);
+        }
+
+        // Background Music Control
+        Const bgMusic = document.querySelector(‘audio’);
+
+        Function toggleMusic() {
+            If (bgMusic.paused) {
+                bgMusic.play();
+            } else {
+                bgMusic.pause();
+            }
+        }
+
+        // Auto-play the background music when page loads (with user interaction)
+        Document.addEventListener(‘click’, function() {
+            If (bgMusic.paused) {
+                bgMusic.play().catch(e => {
+                    console.log(“Autoplay prevented. User interaction needed.”);
+                });
+            }
+        }, { once: true });
+    </script>
+
+</body>
+  </html>
